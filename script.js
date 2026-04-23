@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const target = document.querySelector(this.getAttribute('href'));
       if (target) {
         const navbarHeight = document.getElementById('navbar').offsetHeight;
-        const targetPosition = target.offsetTop - navbarHeight;
+        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
 
         window.scrollTo({
           top: targetPosition,
