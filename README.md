@@ -4,7 +4,8 @@ Landing page profesional para **ALCALD+IA**, software de gestión municipal y co
 
 ## 🌐 Demo
 
-Sitio web: [www.alcaldia.store](https://www.alcaldia.store)
+Sitio web: [www.alcaldia.store](https://www.alcaldia.com.ar)
+Portal de pagos demo: [demo.alcaldia.com.ar](https://demo.alcaldia.com.ar)
 
 ## 📁 Estructura del Proyecto
 
@@ -110,8 +111,8 @@ Agregar más `<div class="slide">` dentro de `#carousel` en `index.html`.
 
 - **Teléfono:** 0351-155575700
 - **Email:** info@alcaldia.com.ar
-- **Web:** [www.alcaldia.store](https://www.alcaldia.store)
+- **Web:** [https://www.alcaldia.com.ar](https://www.alcaldia.com.ar)
 
 ---
 
-**© 2025 ALCALD+IA** - Sistema de Gestión Municipal Inteligente
+**© 2026 ALCALD+IA** - Sistema de Gestión Municipal Inteligente
