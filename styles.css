@@ -1070,6 +1070,25 @@ section {
   line-height: 1.4;
 }
 
+.demo-link-btn {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 10px 22px;
+  background: var(--azul-oscuro);
+  color: var(--blanco);
+  border-radius: 25px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+  letter-spacing: 0.03em;
+}
+
+.demo-link-btn:hover {
+  background: var(--turquesa);
+  transform: translateY(-2px);
+}
+
 .portal-description {
   text-align: center;
   font-size: 1.1rem;
