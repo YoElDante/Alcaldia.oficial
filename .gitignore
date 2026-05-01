@@ -1,0 +1,6 @@
+.env
+vendor/
+writable/
+system/
+ci4_fw/
+ci4_framework.zip
