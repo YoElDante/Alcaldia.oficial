@@ -4,3 +4,7 @@ writable/
 system/
 ci4_fw/
 ci4_framework.zip
+.local/
+public/router.php
+public/script.js
+public/styles.css

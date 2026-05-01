@@ -78,6 +78,95 @@ Abrí `http://localhost:8080` en el navegador. Si ves la página de bienvenida d
 
 `spark` es la herramienta de línea de comandos de CI4. La vas a usar mucho.
 
+### Equivalencia directa con Node.js (lo que ya conocés)
+
+Si en Node hacías esto:
+
+```bash
+node archivo.js
+npm run dev
+npm start
+```
+
+En este proyecto CI4 el paralelo es:
+
+```bash
+php spark serve            # similar a npm run dev
+composer run dev           # alias estable del proyecto para modo desarrollo
+composer run start         # alias para inicio local tipo entorno deploy
+```
+
+Si en Windows `cmd` te aparece "composer no se reconoce" o "php no se reconoce", no es un error de la guía: es un problema de PATH del sistema.
+
+Comandos alternativos inmediatos (validados en este entorno):
+
+```bat
+C:\tools\php84\composer.bat run dev
+C:\tools\php84\composer.bat run start
+```
+
+Verificación rápida de PATH en `cmd`:
+
+```bat
+where composer
+where php
+```
+
+Si esos comandos no devuelven rutas, usá la ruta absoluta anterior o agregá `C:\tools\php84` a la variable de entorno `PATH`.
+
+Configuración global recomendada en Windows (una sola vez):
+
+```powershell
+$target = 'C:\tools\php84'
+$userPath = [Environment]::GetEnvironmentVariable('Path', 'User')
+$parts = if ([string]::IsNullOrWhiteSpace($userPath)) { @() } else { $userPath -split ';' }
+if ($parts -notcontains $target) {
+    $newPath = (($parts + $target) | Where-Object { $_ -and $_.Trim() -ne '' } | Select-Object -Unique) -join ';'
+    [Environment]::SetEnvironmentVariable('Path', $newPath, 'User')
+}
+```
+
+Luego cerrá y abrí terminal nueva y verificá:
+
+```bat
+where php
+where composer
+```
+
+Si usás Git Bash y `composer` sigue sin resolver, agregá este wrapper en `~/.bashrc`:
+
+```bash
+export PATH="/c/tools/php84:$PATH"
+alias php="/c/tools/php84/php.exe"
+unalias composer 2>/dev/null
+composer() { cmd.exe //c C:/tools/php84/composer.bat "$@"; }
+```
+
+Aplicá cambios sin cerrar terminal:
+
+```bash
+source ~/.bashrc
+```
+
+Resumen rápido:
+- `php archivo.php` sería el equivalente crudo de `node archivo.js`.
+- En aplicaciones web con framework (CI4), el entrypoint real no es un archivo suelto: se levanta servidor y se enruta vía `public/index.php`.
+- Por eso, en la práctica vas a usar `spark` o scripts de Composer, no ejecución de archivo aislado.
+
+### Modos de inicio definidos en este proyecto
+
+En `composer.json` quedaron definidos dos inicios:
+
+- `composer run dev`
+    - Comando interno: `php spark serve --host 127.0.0.1 --port 8080`
+    - Uso: desarrollo diario, feedback rápido y flujo estándar CI4.
+
+- `composer run start`
+    - Comando interno: `php -S 127.0.0.1:8080 -t public public/router.php`
+    - Uso: simulación local más cercana al front controller expuesto en deploy.
+
+> Recomendación práctica: usá `dev` para trabajar y `start` para una verificación final de comportamiento antes de publicar.
+
 ---
 
 ## 4. Estructura de carpetas que importa
@@ -213,3 +302,42 @@ Cuando alguien visita `https://tudominio.com/descargas`:
 8. CI4 renderiza la view y devuelve el HTML al browser
 
 Entender este flujo es fundamental. Cualquier cosa que no funcione se puede rastrear siguiendo estos 8 pasos.
+
+---
+
+## 10. Por qué `app/Config` es tan grande (y qué sí te importa)
+
+La carpeta `app/Config/` parece enorme porque **CI4 te entrega una base completa de fábrica** para cubrir muchos escenarios (email, cache, CORS, migraciones, seguridad, sesiones, toolbar, etc.).
+
+Eso no significa que tu proyecto use todo hoy. Significa que el framework ya deja los puntos de extensión listos para cuando los necesites.
+
+### Cómo leerla sin abrumarte
+
+Pensala como una consola de avión: hay muchos controles, pero para despegar solo usás los necesarios.
+
+En este proyecto, los más importantes ahora son:
+
+- `Routes.php`: define las rutas reales de negocio.
+- `Filters.php`: registra y conecta filtros como auth y ratelimit.
+- `App.php`: configuración general de aplicación (base URL, locale, timezone).
+- `Paths.php`: indica dónde está el core del framework en `vendor/`.
+- `Security.php`: política general de seguridad (tokens, headers, etc.).
+- `Session.php`: parámetros de sesión de usuario.
+
+Archivos como `Email.php`, `Migrations.php`, `Pager.php`, `Toolbar.php` o `Images.php` son módulos de capacidad del framework:
+- Si no estás enviando correos, `Email.php` puede quedar con defaults.
+- Si no estás migrando DB todavía, `Migrations.php` no te afecta en lo diario.
+- Si no usás paginación, `Pager.php` queda de soporte.
+
+### Regla práctica
+
+No edites `app/Config` “por curiosidad”. Editalo cuando haya un requerimiento funcional concreto.
+
+Orden recomendado para aprender:
+1. `Routes.php`
+2. `Filters.php`
+3. `App.php`
+4. `Session.php`
+5. `Security.php`
+
+Con eso ya entendés el 80% de la operación real del proyecto.

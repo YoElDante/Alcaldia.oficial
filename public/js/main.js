@@ -1,32 +1,292 @@
+/* Lógica de interacción de la landing ALCALD+IA.
+   Incluye: smooth scroll, hamburger, navbar scroll, carrusel, animaciones, formulario de contacto, nav activo y lazy loading.
+   Variables clave: slideIndex, autoSlideInterval, touchStartX/touchEndX.
+   Dependencias DOM: #navbar, #carousel, #carouselDots, #contactForm, secciones con id. */
+
 document.addEventListener('DOMContentLoaded', function () {
+
+  // ===========================================
+  // SMOOTH SCROLL
+  // ===========================================
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        const navbarHeight = document.getElementById('navbar').offsetHeight;
+        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+
+        // Cerrar menú móvil si está abierto
+        document.getElementById('navLinks').classList.remove('active');
+        document.getElementById('hamburger').classList.remove('active');
+      }
+    });
+  });
+
+  // ===========================================
+  // NAVBAR MOBILE - Hamburger Menu
+  // ===========================================
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+
+  hamburger.addEventListener('click', function () {
+    this.classList.toggle('active');
+    navLinks.classList.toggle('active');
+  });
+
+  // Cerrar menú al hacer click fuera
+  document.addEventListener('click', function (e) {
+    if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+      hamburger.classList.remove('active');
+      navLinks.classList.remove('active');
+    }
+  });
+
+  // ===========================================
+  // NAVBAR - Cambio de fondo al scroll
+  // ===========================================
   const navbar = document.getElementById('navbar');
-  if (navbar) {
-    window.addEventListener('scroll', function () {
-      if (window.scrollY > 80) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
+
+  window.addEventListener('scroll', function () {
+    navbar.style.boxShadow = window.scrollY > 100
+      ? '0 4px 20px rgba(0, 0, 0, 0.15)'
+      : '0 4px 20px rgba(0, 0, 0, 0.1)';
+  });
+
+  // ===========================================
+  // CARRUSEL - Portal de Pago
+  // ===========================================
+  const carousel = document.getElementById('carousel');
+  const slides = document.querySelectorAll('.slide');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const dotsContainer = document.getElementById('carouselDots');
+
+  let slideIndex = 0;
+  const totalSlides = slides.length;
+  let autoSlideInterval;
+
+  // Crea los indicadores de posición del carrusel en el DOM. Sin parámetros. Efecto: inserta elementos span en #carouselDots.
+  function createDots() {
+    for (let i = 0; i < totalSlides; i++) {
+      const dot = document.createElement('span');
+      dot.classList.add('carousel-dot');
+      if (i === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => goToSlide(i));
+      dotsContainer.appendChild(dot);
+    }
+  }
+
+  // Marca como activo el dot del slide actual. Sin parámetros. Efecto: alterna clase 'active' en los dots según slideIndex.
+  function updateDots() {
+    const dots = document.querySelectorAll('.carousel-dot');
+    dots.forEach((dot, index) => {
+      dot.classList.toggle('active', index === slideIndex);
+    });
+  }
+
+  // Navega al slide indicado y mueve el carrusel. @param n índice destino (se normaliza si supera el rango). Efecto: modifica transform y actualiza dots.
+  function goToSlide(n) {
+    slideIndex = n;
+    if (slideIndex >= totalSlides) slideIndex = 0;
+    if (slideIndex < 0) slideIndex = totalSlides - 1;
+
+    carousel.style.transform = `translateX(-${slideIndex * 100}%)`;
+    updateDots();
+  }
+
+  // Avanza al siguiente slide. Sin parámetros. Llama a goToSlide con índice +1.
+  function nextSlide() {
+    goToSlide(slideIndex + 1);
+  }
+
+  // Retrocede al slide anterior. Sin parámetros. Llama a goToSlide con índice -1.
+  function prevSlide() {
+    goToSlide(slideIndex - 1);
+  }
+
+  // Inicia el avance automático del carrusel cada 5 segundos. Sin parámetros. Efecto: asigna intervalo a autoSlideInterval.
+  function startAutoSlide() {
+    autoSlideInterval = setInterval(nextSlide, 5000);
+  }
+
+  // Detiene el avance automático. Sin parámetros. Efecto: limpia autoSlideInterval.
+  function stopAutoSlide() {
+    clearInterval(autoSlideInterval);
+  }
+
+  // Event listeners carrusel
+  if (slides.length > 0) {
+    createDots();
+    startAutoSlide();
+
+    prevBtn.addEventListener('click', () => {
+      prevSlide();
+      stopAutoSlide();
+      startAutoSlide();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      nextSlide();
+      stopAutoSlide();
+      startAutoSlide();
+    });
+
+    // Pausar auto-slide al hover
+    carousel.parentElement.addEventListener('mouseenter', stopAutoSlide);
+    carousel.parentElement.addEventListener('mouseleave', startAutoSlide);
+
+    // Soporte touch/swipe
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    carousel.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    carousel.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, { passive: true });
+
+    // Evalúa si el gesto touch fue swipe y navega en consecuencia. Sin parámetros. @threshold 50px diferencia mínima para activar.
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      const diff = touchStartX - touchEndX;
+
+      if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+        stopAutoSlide();
+        startAutoSlide();
+      }
+    }
+  }
+
+  // ===========================================
+  // ANIMACIONES SCROLL - Intersection Observer
+  // ===========================================
+  const fadeElements = document.querySelectorAll('.feature-card, .cliente-card, .sobre-content, .institucional-content, .contacto-content');
+
+  fadeElements.forEach(el => el.classList.add('fade-in'));
+
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.1
+  };
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  fadeElements.forEach(el => observer.observe(el));
+
+  // ===========================================
+  // FORMULARIO DE CONTACTO
+  // ===========================================
+  const contactForm = document.getElementById('contactForm');
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const nombre = document.getElementById('nombre').value;
+      const email = document.getElementById('email').value;
+      const municipio = document.getElementById('municipio').value;
+      const mensaje = document.getElementById('mensaje').value;
+
+      // Crear mensaje para WhatsApp
+      let whatsappMessage = `Hola, soy ${nombre}`;
+      if (municipio) whatsappMessage += ` de ${municipio}`;
+      whatsappMessage += `.%0A%0AEmail: ${email}`;
+      if (mensaje) whatsappMessage += `%0A%0AMensaje: ${mensaje}`;
+      whatsappMessage += `%0A%0AMe interesa conocer más sobre ALCALD+IA.`;
+
+      // Abrir WhatsApp con el mensaje
+      const whatsappURL = `https://wa.me/+543515575700?text=${whatsappMessage}`;
+      window.open(whatsappURL, '_blank');
+
+      // Mostrar confirmación
+      alert('¡Gracias por contactarnos! Se abrirá WhatsApp para continuar la conversación.');
+
+      // Limpiar formulario
+      contactForm.reset();
+    });
+  }
+
+  // ===========================================
+  // ACTIVE LINK EN NAVBAR SEGÚN SCROLL
+  // ===========================================
+  const sections = document.querySelectorAll('section[id]');
+  const navItems = document.querySelectorAll('.nav-links a');
+
+  // Resalta el enlace del navbar correspondiente a la sección visible en pantalla. Sin parámetros. Efecto: alterna clase 'active' en nav-links.
+  function highlightNavOnScroll() {
+    const scrollY = window.pageYOffset;
+    const navbarHeight = navbar.offsetHeight;
+
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - navbarHeight - 100;
+      const sectionHeight = section.offsetHeight;
+      const sectionId = section.getAttribute('id');
+
+      if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+        navItems.forEach(item => {
+          item.classList.remove('active');
+          if (item.getAttribute('href') === `#${sectionId}`) {
+            item.classList.add('active');
+          }
+        });
       }
     });
   }
 
-  const fadeElements = document.querySelectorAll('.feature-card, .cliente-card, .sobre-content, .institucional-content, .contacto-content');
-  if (fadeElements.length) {
-    fadeElements.forEach(function (el) {
-      el.classList.add('fade-in');
-    });
+  window.addEventListener('scroll', highlightNavOnScroll);
 
-    const observer = new IntersectionObserver(function (entries, ob) {
-      entries.forEach(function (entry) {
+  // ===========================================
+  // LAZY LOADING PARA IMÁGENES
+  // ===========================================
+  const lazyImages = document.querySelectorAll('img[data-src]');
+
+  if ('IntersectionObserver' in window) {
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          ob.unobserve(entry.target);
+          const img = entry.target;
+          img.src = img.dataset.src;
+          img.removeAttribute('data-src');
+          imageObserver.unobserve(img);
         }
       });
-    }, { threshold: 0.1 });
+    });
 
-    fadeElements.forEach(function (el) {
-      observer.observe(el);
+    lazyImages.forEach(img => imageObserver.observe(img));
+  } else {
+    // Fallback para navegadores sin IntersectionObserver
+    lazyImages.forEach(img => {
+      img.src = img.dataset.src;
     });
   }
+
+  // ===========================================
+  // CONSOLE LOG - Info del proyecto
+  // ===========================================
+  console.log('%c ALCALD+IA ', 'background: #00A8B5; color: white; font-size: 20px; font-weight: bold; padding: 10px;');
+  console.log('%c Gestión Municipal Inteligente ', 'color: #003E5C; font-size: 14px;');
+  console.log('%c www.alcaldia.store ', 'color: #00A8B5; font-size: 12px;');
+
 });

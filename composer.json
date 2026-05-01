@@ -16,6 +16,10 @@
             "App\\": "app/"
         }
     },
+    "scripts": {
+        "dev": "php spark serve --host 127.0.0.1 --port 8080",
+        "start": "php -S 127.0.0.1:8080 -t public public/router.php"
+    },
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",

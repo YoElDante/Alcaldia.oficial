@@ -410,6 +410,68 @@ Estas reglas definen el comportamiento esperado de cualquier agente que trabaje 
 - **Nunca** instalar librerías externas sin justificar la necesidad y verificar compatibilidad con Donweb.
 - **Nunca** usar colores, tipografías o gradientes fuera de los definidos en la sección 5.
 - **Nunca** hardcodear credenciales, passwords o rutas absolutas de servidor.
+- Comentarios en código y documentación técnica redactados en **español**.
+- Excepción de idioma: archivos generados o instalados por librerías/frameworks de terceros (por ejemplo, archivos base de CI4). Esos contenidos pueden permanecer en su idioma original.
+
+### Documentación técnica mínima obligatoria
+
+- Todo archivo nuevo o modificado debe iniciar con un bloque breve de documentación en español que explique:
+  - objetivo del archivo,
+  - qué componentes incluye (clases, funciones, vistas o estilos),
+  - variables o constantes relevantes,
+  - dependencias críticas si aplica.
+- Toda función o método debe tener encima un comentario breve en español con:
+  - propósito,
+  - parámetros esperados,
+  - retorno esperado,
+  - efectos colaterales importantes (si existen).
+- Todo bloque de lógica no trivial debe tener un comentario breve en español que indique la intención del bloque.
+- La documentación debe ser formal, profesional y mínima: sin texto redundante, sin explicación obvia línea por línea y orientada a lectura humana + interpretación por IA con bajo costo de tokens.
+- Mantener coherencia con el lenguaje del archivo:
+  - PHP: PHPDoc o comentario de bloque corto.
+  - JS/CSS/HTML: comentario de bloque o de línea breve.
+
+#### Plantilla operativa recomendada (copiar y adaptar)
+
+- Encabezado de archivo (4 líneas máximo):
+  - Qué resuelve este archivo.
+  - Qué contiene internamente (clases, funciones, vistas, reglas CSS, etc.).
+  - Variables/constantes clave.
+  - Dependencias críticas si aplica.
+- Encabezado de función/método (3 líneas máximo):
+  - Propósito de la función.
+  - Parámetros de entrada y formato esperado.
+  - Retorno y efecto colateral relevante.
+- Encabezado de bloque no trivial (1-2 líneas):
+  - Intención del bloque y criterio de decisión principal.
+
+#### Ejemplo mínimo PHP
+
+```php
+/**
+ * Gestiona la validación de claves temporales para descargas.
+ * Contiene reglas de vencimiento, usos y activación de clave.
+ * Variables clave: $clave, $ahora, $maxUsos.
+ */
+```
+
+```php
+/**
+ * Verifica si una clave puede usarse en esta request.
+ * @param array $clave Estructura de clave temporal validada.
+ * @return bool true si cumple vigencia y límite de usos.
+ */
+```
+
+#### Ejemplo mínimo JS/CSS/HTML
+
+```js
+// Inicializa el carrusel principal y sincroniza indicadores activos.
+```
+
+```css
+/* Define variables de color base para mantener identidad visual institucional. */
+```
 
 ### Al entregar cambios
 
@@ -417,6 +479,7 @@ Estas reglas definen el comportamiento esperado de cualquier agente que trabaje 
 - Incluir siempre: **riesgos identificados** y **siguiente paso recomendado**.
 - No subir a producción sin validación explícita del desarrollador.
 - Si una propuesta difiere del AGENTS.md, señalarlo explícitamente antes de implementar.
+- Mensajes de commit: en **español**, formales y descriptivos, manteniendo formato de conventional commits cuando aplique.
 
 ---
 
