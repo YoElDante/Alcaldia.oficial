@@ -1,0 +1,114 @@
+🚀 Me lo preguntan todos los días: "¿Cómo instalo todo esto?" Acá la respuesta: un comando, cualquier agente, cualquier sistema operativo. AI Gentle Stack te configura Engram, SDD, Skills, MCP y personalidad de agente de una sola vez. Sin tocar nada. Funciona con Claude Code, Open Code, Codex, Cursor y VS Code
+
+📌 TIMESTAMPS
+0:00 Intro - La pregunta que todos hacen: ¿cómo instalo todo?
+0:39 AI Gentle Stack: un comando, cualquier agente, cualquier OS
+1:03 Soporte: Windows nativo, Linux, macOS + 6 agentes
+1:40 El problema: 90% de devs no usa todo el potencial de la IA
+2:37 La solución: potenciar lo que ya tenés
+2:56 Engram: cerebro virtual, memoria persistente entre sesiones
+3:28 SDD: Spec Driven Development basado en OpenSpec.dev
+3:55 Skills: pedacitos de contexto que se cargan por necesidad
+4:04 Integraciones MCP: Context7, Notion, Jira
+4:32 Personalidad del agente: te enseña, no solo responde
+5:08 Economía de tokens: 50-70% de ahorro con subagentes
+5:59 OpenSpec.dev: especificaciones legibles por IA
+6:56 Delegación a subagentes: cada uno arranca en hoja en blanco
+7:25 Skills como subagentes: super subagentes con skills propias
+8:32 Engram a fondo: Go + SQLite, búsqueda por layers, privacidad
+10:05 Engram Sync: compartir memoria entre compañeros via Git
+10:51 Engram Cloud (futuro): sincronización en tiempo real
+13:21 Instalación con Homebrew: brew install
+13:58 Demo: gentle-ai TUI en acción
+14:22 Detección de OS, dependencias y agentes
+14:49 Personalidad: habla como yo, neutral o custom
+15:08 Ecosistema: full gentleman, mínimo o a medida
+15:25 Multi-model: elegir modelo por fase de SDD
+16:12 Recomendación de modelos por fase (Opus, Gemini, Sonnet, Codex)
+18:48 Gemini: espectacular para razonar, desastre para implementar
+19:31 Instalar solo Engram: brew install engram
+19:56 Instalar Agent Teams Lite: clonar + script
+21:53 Demo Claude Code: orquestador + subagentes en acción
+23:08 3% de contexto en el orquestador principal
+23:50 SDD se activa solo con lenguaje natural
+24:54 Demo Open Code: SDD Orchestrator + multi-model (GPT 5.4 + Codex)
+26:00 El agente te obliga a pensar antes de codear
+27:00 Skills auto-indexadas en Engram para subagentes
+28:04 Subagentes asíncronos en Open Code
+28:47 Mentalidad: la IA puede hacer todo, descubrí los límites
+29:46 Human in the loop: revisá el código, no delegues ciego
+30:12 Ustedes son orquestadores del orquestador
+30:30 Cierre
+
+🧠 QUÉ VAS A APRENDER
+- Instalar todo el ecosistema de IA con un solo comando
+- Engram: memoria persistente que comparte conocimiento entre sesiones y compañeros
+- SDD con multi-model: elegir el modelo ideal para cada fase
+- Skills como subagentes que se cargan por necesidad
+- 50-70% de ahorro en tokens con orquestación de subagentes
+- Qué modelo usar para cada tarea (Opus, Gemini, Sonnet, Codex)
+- Demo real con Claude Code y Open Code
+
+━━━━━━━━━━━━━━━━━━━━━
+
+🧩 EL ECOSISTEMA COMPLETO
+
+Un comando configura todo:
+→ Engram: memoria persistente (Go/SQLite/MCP)
+→ SDD: Spec Driven Development con subagentes especializados
+→ Skills: contexto que se carga por necesidad
+→ MCP: Context7, Notion, Jira y lo que necesites
+→ Personalidad: agente que enseña, no solo responde
+
+Funciona con: Claude Code, Open Code, Codex, Cursor, VS Code
+Soporte: Windows nativo, Linux, macOS
+
+━━━━━━━━━━━━━━━━━━━━━
+
+📦 REPOSITORIOS
+
+| Repo | Link |
+|------|------|
+| ⚙️ AI Gentle Stack | https://github.com/Gentleman-Programming/gentle-ai |
+| 🧠 Engram | https://github.com/Gentleman-Programming/engram |
+| 🤖 Agent Teams Lite | https://github.com/Gentleman-Programming/agent-teams-lite |
+| 🎯 Gentleman Skills | https://github.com/Gentleman-Programming/Gentleman-Skills |
+| 🛡️ GGA | https://github.com/Gentleman-Programming/gentleman-guardian-angel |
+| ⚙️ Gentleman.Dots | https://github.com/Gentleman-Programming/Gentleman.Dots |
+
+🔗 OpenSpec.dev: https://openspec.dev
+
+━━━━━━━━━━━━━━━━━━━━━
+
+🤑 DESCUENTOS EXCLUSIVOS
+
+💻 CodeCrafters - Challenges reales
+→ https://app.codecrafters.io/join?via=GentlemanProgramming
+
+🎧 Linsoul Audio
+→ https://www.linsoul.com/GentlemanProgramming
+
+━━━━━━━━━━━━━━━━━━━━━
+
+📺 DONDE ENCONTRARME
+- Twitch: https://twitch.tv/gentleman_programming
+- Canal VODS: https://youtube.com/@GentlemanVods
+- Kick: https://kick.com/gentleman-programming
+- Todos mis links: https://doras.to/gentleman-programming
+
+━━━━━━━━━━━━━━━━━━━━━
+
+💼 COLABORACIONES Y NEGOCIOS
+Email: gentleman@ohmybitz.com
+
+🎬 EDICIÓN
+Editor: Cristian
+Email: Cris081812@gmail.com
+Discord: Cristian1812
+
+━━━━━━━━━━━━━━━━━━━━━
+
+👨‍💻 SOBRE ESTE CANAL
+Suscribite y activá la campanita 🔔
+
+#AIGentleStack #Engram #SDD #Skills #OpenCode #ClaudeCode #Codex #Cursor #IA #GentlemanProgramming #OpenSource #DevTools #Subagentes #MCP #Programacion
