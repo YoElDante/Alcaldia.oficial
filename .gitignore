@@ -8,3 +8,5 @@ ci4_framework.zip
 public/router.php
 public/script.js
 public/styles.css
+public/distribucion/*
+!public/distribucion/.gitkeep

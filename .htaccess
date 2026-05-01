@@ -1,0 +1,16 @@
+# Bloquea acceso directo a carpetas sensibles
+RedirectMatch 403 ^/(app|vendor|writable|storage|system)(/?.*)?$
+
+# Redirige todo al entry point de CI4 en public/
+<IfModule mod_rewrite.c>
+    Options +FollowSymlinks
+    RewriteEngine On
+
+    # Deja pasar archivos y carpetas que existen fisicamente (assets, css, etc.)
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Todo lo demas va a public/
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>

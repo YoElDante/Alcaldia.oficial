@@ -14,6 +14,16 @@
   --color-text-muted: #666666;
   --color-text-secondary: #555555;
   --color-text-dark: #444444;
+  /* Estados de retroalimentacion al usuario */
+  --color-error-bg: #FFE6E6;
+  --color-error-text: #7a1f1f;
+  --color-error-border: #e5a4a4;
+  --color-warning-bg: #fff7d6;
+  --color-warning-text: #5a4b00;
+  --color-warning-border: #e8d890;
+  /* Componentes de tabla */
+  --color-table-header: #f1f6f7;
+  --color-table-border: #d8e5e8;
   --sombra: 0 4px 20px rgba(0, 0, 0, 0.1);
   --sombra-hover: 0 8px 30px rgba(0, 0, 0, 0.15);
   --transicion: all 0.3s ease;

@@ -1,4 +1,9 @@
 <?php
+/**
+ * Registro central de rutas HTTP del portal.
+ * Define navegacion publica y endpoints de acceso/descarga protegida.
+ * Dependencia critica: filtros auth y ratelimit de CodeIgniter.
+ */
 
 use CodeIgniter\Router\RouteCollection;
 
@@ -11,4 +16,5 @@ $routes->get('/tutoriales', 'TutorialesController::index');
 $routes->get('/descargas', 'DescargasController::index');
 $routes->post('/descargas/login', 'DescargasController::login', ['filter' => 'ratelimit']);
 $routes->get('/descargas/panel', 'DescargasController::panel', ['filter' => 'auth']);
+$routes->get('/descargas/archivo/(:segment)', 'DescargasController::download/$1');
 $routes->get('/descargas/logout', 'DescargasController::logout', ['filter' => 'auth']);

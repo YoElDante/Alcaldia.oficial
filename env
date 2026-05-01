@@ -26,6 +26,10 @@
 # app.forceGlobalSecureRequests = false
 # app.CSPEnabled = false
 
+# Ruta absoluta opcional para carpeta de instaladores.
+# Si no se define, la app usa FCPATH/distribucion.
+# downloads.path = /home/usuario/public_html/distribucion
+
 #--------------------------------------------------------------------
 # DATABASE
 #--------------------------------------------------------------------

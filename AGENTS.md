@@ -5,6 +5,82 @@
 
 ---
 
+## 0. Protocolo Obligatorio para Agentes de IA
+
+> Esta sección es la PRIMERA que debe ejecutarse. Sin excepción. Sin importar el agente (Claude, GitHub Copilot, Codex, u otro).
+
+### 0.1 Engram — Memoria Persistente (OBLIGATORIO)
+
+Engram es el sistema de memoria persistente del proyecto. Sobrevive compactaciones y cambios de sesión. **No operar sin él.**
+
+**Al iniciar cualquier sesión:**
+1. Llamar `mem_context` — recupera historial reciente de la sesión anterior
+2. Llamar `mem_search` con keywords del tema actual — busca decisiones y convenciones previas
+3. Si se encontró contexto relevante: usar `mem_get_observation(id)` para leer el contenido completo (los resultados de búsqueda están truncados)
+
+**Durante el trabajo — guardar INMEDIATAMENTE y SIN QUE SE PIDA después de:**
+- Cualquier decisión de arquitectura o diseño
+- Un bug resuelto (incluir causa raíz)
+- Una convención establecida
+- Un descubrimiento no obvio del codebase
+- Una preferencia o restricción del usuario aprendida
+- Cualquier configuración de entorno completada
+
+Formato `mem_save` obligatorio:
+```
+title:     Verbo + qué — corto y buscable
+type:      bugfix | decision | architecture | discovery | pattern | config | preference
+scope:     project
+topic_key: clave estable si el tema puede evolucionar (ej. "architecture/descargas")
+content:
+  Qué:      Una oración — qué se hizo
+  Por qué:  Motivación (bug, requerimiento, seguridad, etc.)
+  Dónde:    Archivos afectados
+  Aprendido: Gotchas o edge cases (omitir si no aplica)
+```
+
+**Al cerrar sesión o antes de decir "listo":**
+Llamar `mem_session_summary` con: Goal, Instructions, Discoveries, Accomplished, Next Steps, Relevant Files.
+Esto NO es opcional. Sin este llamado, la siguiente sesión arranca ciega.
+
+**Después de una compactación:**
+1. Llamar `mem_session_summary` con el contenido compactado — para no perder lo anterior
+2. Llamar `mem_context` — recuperar contexto de sesiones previas
+3. Recién entonces continuar
+
+### 0.2 SDD — Spec-Driven Development (para cambios sustanciales)
+
+Para cualquier cambio que involucre más de un archivo o lógica nueva, aplicar el ciclo SDD:
+
+```
+/sdd-explore → /sdd-propose → /sdd-spec → /sdd-tasks → /sdd-apply → /sdd-verify
+```
+
+El flujo correcto es:
+```
+AGENTS.md + contexto Engram → planificar con SDD → código correcto → GGA confirma
+```
+
+**El flujo INCORRECTO (prohibido):**
+```
+código escrito a ciegas → GGA falla → sesión de correcciones reactivas
+```
+
+GGA (Guardian Angel) es una confirmación, no un detector primario de errores.
+
+### 0.3 Checklist pre-código (ejecutar antes de escribir cualquier archivo)
+
+- [ ] `mem_context` ejecutado — contexto de sesión anterior recuperado
+- [ ] `mem_search` ejecutado con keywords del área de trabajo
+- [ ] AGENTS.md leído en su totalidad (o confirmado desde Engram que está cacheado)
+- [ ] Convenciones de la sección relevante verificadas (arquitectura, seguridad, nomenclatura, diseño)
+- [ ] Plan SDD activo si el cambio toca más de un archivo
+- [ ] Skill registry consultado si el contexto lo requiere
+
+**Si algún item no está marcado, no se escribe código.**
+
+---
+
 ## 1. Contexto del Proyecto
 
 **Producto**: Portal web oficial de ALCALD+IA — software de gestión municipal con IA.
@@ -175,6 +251,14 @@ Todas las vistas del proyecto — actuales y futuras — deben mantener coherenc
   --color-white:      #FFFFFF;  /* Fondo principal */
   --color-secondary:  #F5F5F5;  /* Gris claro — elementos secundarios */
   --color-whatsapp:   #25D366;  /* Verde WhatsApp */
+  --color-error-bg:   #FFE6E6;  /* Fondo de alertas de error */
+  --color-error-text: #7A1F1F;  /* Texto de alertas de error */
+  --color-error-border:#E5A4A4; /* Borde de alertas de error */
+  --color-warning-bg: #FFF7D6;  /* Fondo de alertas de advertencia */
+  --color-warning-text:#5A4B00; /* Texto de alertas de advertencia */
+  --color-warning-border:#E8D890; /* Borde de alertas de advertencia */
+  --color-table-header:#F1F6F7; /* Encabezado de tablas */
+  --color-table-border:#D8E5E8; /* Bordes de tablas */
 }
 ```
 
