@@ -173,8 +173,11 @@ alcaldia-web-oficial/
 │   ├── assets/
 │   │   └── img/
 │   ├── css/
-│   │   └── main.css
+│   │   ├── shared-components.css   ← Variables, navbar, botones, decoraciones (TODAS las vistas)
+│   │   ├── main.css                ← Estilos exclusivos de la landing (home)
+│   │   └── error-view.css          ← Layout de páginas de error (404, etc.)
 │   ├── js/
+│   │   ├── main.js
 │   │   ├── smooth-scroll.js
 │   │   └── carousel.js
 │   ├── index.php                   ← Front controller de CI4 (no modificar)
@@ -240,116 +243,137 @@ Este proyecto sigue **CI4 / PSR-4**. El autoloader de Composer mapea el nombre d
 
 Todas las vistas del proyecto — actuales y futuras — deben mantener coherencia visual con la landing existente. Esta paleta, tipografía y gradientes son la identidad visual de ALCALD+IA.
 
-### 5.1 Paleta de colores
+### 5.1 Arquitectura CSS — Obligatoria
 
-```css
-/* Definir siempre como custom properties en :root */
-:root {
-  --color-primary:    #00A8B5;  /* Turquesa — acentos, botones, logo */
-  --color-dark:       #003E5C;  /* Azul oscuro — headings, footer, textos */
-  --color-light-bg:   #E0F7FA;  /* Azul claro — fondos de secciones pares */
-  --color-white:      #FFFFFF;  /* Fondo principal */
-  --color-secondary:  #F5F5F5;  /* Gris claro — elementos secundarios */
-  --color-whatsapp:   #25D366;  /* Verde WhatsApp */
-  --color-error-bg:   #FFE6E6;  /* Fondo de alertas de error */
-  --color-error-text: #7A1F1F;  /* Texto de alertas de error */
-  --color-error-border:#E5A4A4; /* Borde de alertas de error */
-  --color-warning-bg: #FFF7D6;  /* Fondo de alertas de advertencia */
-  --color-warning-text:#5A4B00; /* Texto de alertas de advertencia */
-  --color-warning-border:#E8D890; /* Borde de alertas de advertencia */
-  --color-table-header:#F1F6F7; /* Encabezado de tablas */
-  --color-table-border:#D8E5E8; /* Bordes de tablas */
-}
-```
+El sistema CSS tiene **tres archivos con responsabilidades estrictas**. No mezclar.
 
-### 5.2 Tipografía
+| Archivo | Carga en | Responsabilidad |
+|---------|----------|-----------------|
+| `public/css/shared-components.css` | **Todas las vistas** (via `partials/head.php` y manual en vistas de error) | Fuente única de verdad: `:root` con variables, navbar, botones, layout interno, fondos institucionales y **sistema completo de decoraciones** |
+| `public/css/main.css` | Landing (home) solamente | Estilos exclusivos del home: hero, carrusel, secciones, footer |
+| `public/css/error-view.css` | Páginas de error (404, etc.) | Solo layout de pantalla de error: `.error-page`, `.wrap`, `.actions`, `.help-text` |
 
-```css
-/* Headings: Oswald bold uppercase — como en los folletos impresos */
-h1, h2, h3, .heading {
-  font-family: 'Oswald', sans-serif;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: var(--color-dark);
-}
-
-/* Body: Open Sans legible y liviano */
-body, p, li {
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 400;
-}
-
-.text-light {
-  font-weight: 300;
-}
-```
-
-Import obligatorio en el `<head>` de todas las vistas:
+**Regla de carga en vistas de error**: cargar `shared-components.css` ANTES de `error-view.css`:
 ```html
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Open+Sans:wght@400;300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/shared-components.css">
+<link rel="stylesheet" href="/css/error-view.css">
 ```
 
-### 5.3 Gradientes
+**Nunca** redefinir `:root`, botones ni clases de decoración fuera de `shared-components.css`.
+
+### 5.2 Paleta de colores
+
+Las variables están definidas **una sola vez** en el `:root` de `public/css/shared-components.css`. No redefinir en ningún otro archivo.
 
 ```css
-/* Hero y secciones de alto impacto */
-.bg-hero {
-  background: linear-gradient(45deg, #003E5C, #00A8B5);
-}
-
-/* Navbar */
-.bg-navbar {
-  background: linear-gradient(to right, #E0F7FA, #00A8B5);
-}
-
-/* Footer */
-.bg-footer {
-  background-color: #003E5C;
-  color: #FFFFFF;
-}
-
-/* Secciones pares (sobre, clientes, etc.) */
-.bg-section-alt {
-  background-color: #E0F7FA;
-}
+--color-primary:    #00A8B5;  /* Turquesa — acentos, botones, logo */
+--color-dark:       #003E5C;  /* Azul oscuro — headings, footer, textos */
+--color-light-bg:   #E0F7FA;  /* Azul claro — fondos de secciones pares (.bg-section-alt) */
+--color-white:      #FFFFFF;  /* Fondo principal */
+--color-secondary:  #F5F5F5;  /* Gris claro — elementos secundarios */
+--color-whatsapp:   #25D366;  /* Verde WhatsApp */
+--sombra:           0 4px 20px rgba(0,0,0,0.1);
+--sombra-hover:     0 8px 30px rgba(0,0,0,0.15);
+--transicion:       all 0.3s ease;
 ```
 
-### 5.4 Componentes base
+### 5.3 Tipografía
 
 ```css
-/* Botón primario */
-.btn-primary {
-  background-color: var(--color-primary);
-  color: #FFFFFF;
-  border: none;
-  border-radius: 4px;
-  padding: 12px 24px;
-  font-family: 'Oswald', sans-serif;
-  text-transform: uppercase;
-  cursor: pointer;
-}
+/* Headings: Oswald bold uppercase */
+h1, h2, h3 { font-family: 'Oswald', sans-serif; font-weight: 700; text-transform: uppercase; }
 
-/* Botón secundario / outline */
-.btn-secondary {
-  background: transparent;
-  color: var(--color-primary);
-  border: 2px solid var(--color-primary);
-  border-radius: 4px;
-  padding: 10px 22px;
-  font-family: 'Oswald', sans-serif;
-  text-transform: uppercase;
-  cursor: pointer;
-}
+/* Body: Open Sans */
+body, p, li { font-family: 'Open Sans', sans-serif; font-weight: 400; }
 ```
 
-### 5.5 Reglas de estilo para nuevas vistas
+Import obligatorio (ya incluido en `partials/head.php`):
+```html
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+```
 
-- Toda vista nueva usa la paleta de colores definida en la sección 5.1. Ningún color ad-hoc.
-- Headings: Oswald bold uppercase.
-- Body text: Open Sans regular o light.
+### 5.4 Clases de uso inmediato (ya en shared-components.css)
+
+#### Fondos institucionales
+```html
+<!-- Fondo turquesa claro — secciones alternas en vistas internas -->
+<section class="bg-section-alt"> ... </section>
+
+<!-- Gradiente institucional oscuro (dark → turquesa) -->
+<section class="bg-institutional-gradient"> ... </section>
+```
+
+#### Botones
+```html
+<a class="btn btn-primary" href="/ruta">Acción principal</a>
+<button class="btn btn-secondary">Acción secundaria</button>
+<a class="btn btn-whatsapp" href="https://wa.me/...">
+  <img src="whatsapp-icon.png" alt="WhatsApp"> Contactar
+</a>
+```
+
+#### Layout de vistas internas (pagos, tutoriales, descargas)
+```html
+<body class="layout-internal-shell">
+  <main class="layout-internal-main">
+    <section class="internal-hero-section bg-section-alt">
+      <div class="container container-narrow text-center">
+        <h1 class="section-title">Título</h1>
+        <p class="section-subtitle centered-block">Subtítulo</p>
+      </div>
+    </section>
+  </main>
+</body>
+```
+
+### 5.5 Sistema de decoraciones
+
+Las clases decorativas están en `shared-components.css`. Usarlas directamente en cualquier vista sin necesidad de definir CSS adicional.
+
+#### Patrón de puntitos (fondo oscuro con gradiente)
+```html
+<div class="dots-pattern dots-top-left"></div>
+<div class="dots-pattern dots-bottom-right"></div>
+<div class="dots-pattern dots-middle-left"></div>
+```
+
+#### Círculos decorativos (fondo oscuro)
+```html
+<div class="hero-circle hero-circle-1"></div>
+<div class="hero-circle hero-circle-2"></div>
+<div class="hero-circle hero-circle-3"></div>
+```
+
+#### Decoraciones semánticas para secciones con fondo claro
+```html
+<!-- Puntos coloreados -->
+<div class="decoration-dots dots-turquesa section-decoration" style="top:5%;right:3%"></div>
+<div class="decoration-dots dots-dark section-decoration" style="bottom:8%;left:4%"></div>
+
+<!-- Círculos outline -->
+<div class="decoration-circle circle-outline section-decoration" style="top:10%;right:2%"></div>
+<div class="decoration-circle circle-filled section-decoration" style="bottom:5%;left:3%"></div>
+
+<!-- Barras diagonales -->
+<div class="section-diagonal-bars bars-left bars-light">
+  <div class="diagonal-bar"></div>
+  <div class="diagonal-bar"></div>
+  <div class="diagonal-bar"></div>
+</div>
+```
+
+**Regla de sobreescritura del hero de la landing**: las decoraciones del `#hero` son más grandes y tienen animaciones. Están definidas en `main.css` bajo selector `#hero .dots-pattern` / `#hero .hero-circle-*`. Las vistas internas y de error reciben automáticamente la versión base (más pequeña, sin animación) de `shared-components.css`.
+
+### 5.6 Reglas de estilo para nuevas vistas
+
+- Toda vista nueva carga `layouts/main.php` (que ya incluye `partials/head.php` → shared + main). No agregar links CSS extra salvo que la vista sea standalone (como páginas de error).
+- Usar únicamente las variables CSS de `shared-components.css`. Ningún color ad-hoc.
+- Headings: Oswald bold uppercase. Body text: Open Sans regular o light.
 - Responsive obligatorio: `@media (max-width: 768px)` como breakpoint principal.
-- Favicon: `docs/diseño/favicon.ico`.
 - Animaciones: sutiles fade-in al scroll con `IntersectionObserver`. Sin efectos pesados.
+- Prohibido usar `<style>` inline en vistas, `<script>` inline, o handlers inline (`onclick`, `onchange`).
+- Si un patrón visual nuevo se repite en más de una vista: va a `shared-components.css`, no se duplica.
+- CSS específico de un módulo (ej. descargas) puede ir en un archivo dedicado (`public/css/descargas.css`) cargado solo en esa vista, pero las variables y decoraciones siguen viniendo de shared.
 
 ---
 
@@ -494,6 +518,8 @@ Estas reglas definen el comportamiento esperado de cualquier agente que trabaje 
 - **Nunca** instalar librerías externas sin justificar la necesidad y verificar compatibilidad con Donweb.
 - **Nunca** usar colores, tipografías o gradientes fuera de los definidos en la sección 5.
 - **Nunca** hardcodear credenciales, passwords o rutas absolutas de servidor.
+- **Siempre** respetar separación frontend: HTML en vistas, CSS en `public/css`, JS en `public/js`, sin inline CSS/JS.
+- **Siempre** extraer componentes visuales repetidos (fondos decorativos, navbar, bloques UI comunes) a estilos reutilizables en lugar de duplicarlos por vista.
 - Comentarios en código y documentación técnica redactados en **español**.
 - Excepción de idioma: archivos generados o instalados por librerías/frameworks de terceros (por ejemplo, archivos base de CI4). Esos contenidos pueden permanecer en su idioma original.
 
@@ -577,3 +603,13 @@ Estas reglas definen el comportamiento esperado de cualquier agente que trabaje 
 | `docs/Definicion de proyecto/donweb-centro-ayuda-fuentes.md` | Fuentes oficiales Donweb, compatibilidad CI4 verificada |
 | `docs/EcoGentlemanAI/` | Ecosistema Gentleman Programming (Engram, SDD, Skills) |
 | `docs/diseño/` | Assets de diseño: logos, favicon, folletos originales |
+
+---
+
+## 12. Skills Locales del Repositorio
+
+Cuando el contexto del cambio aplique, los agentes deben cargar y respetar las skills locales del proyecto.
+
+| Skill | Propósito | Archivo |
+|------|-----------|---------|
+| `alcaldia-ui-conventions` | Convenciones UI/CSS/JS para vistas, navbar, fondos decorativos y reutilización de componentes | [skills/alcaldia-ui-conventions/SKILL.md](skills/alcaldia-ui-conventions/SKILL.md) |
