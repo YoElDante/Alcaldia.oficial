@@ -3,7 +3,6 @@ RedirectMatch 403 ^/(app|vendor|writable|storage|system)(/?.*)?$
 
 # Redirige todo al entry point de CI4 en public/
 <IfModule mod_rewrite.c>
-    Options +FollowSymlinks
     RewriteEngine On
 
     # Deja pasar archivos y carpetas que existen fisicamente (assets, css, etc.)
