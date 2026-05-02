@@ -853,6 +853,14 @@ td:last-child {
   border-color: var(--color-primary);
 }
 
+.contacto-form .btn-primary {
+  width: 100%;
+}
+
+.contacto-form .btn-primary:hover {
+  background: var(--color-white);
+  color: var(--color-primary);
+}
 
 /* ===========================================
    FOOTER
