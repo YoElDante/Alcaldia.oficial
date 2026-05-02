@@ -8,36 +8,46 @@
 ?>
 <?= $this->extend('layouts/main') ?>
 
+<?= $this->section('styles') ?>
+<link rel="stylesheet" href="<?= base_url('css/descargas.css') ?>">
+<?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
-<section style="padding:48px 0;">
-    <div class="container">
-        <h1>Panel de Descargas</h1>
-        <p>Selecciona un archivo para iniciar la descarga protegida.</p>
+<section class="descargas-section">
+
+    <!-- Decoraciones: círculos outline turquesa y puntos a la derecha -->
+    <div class="decoration-circle circle-outline" style="top:-30px; right:6%; width:160px; height:160px;"></div>
+    <div class="decoration-circle circle-outline" style="bottom:40px; right:3%; width:100px; height:100px;"></div>
+    <div class="decoration-dots dots-turquesa" style="top:60px; right:4%; width:90px; height:90px;"></div>
+    <div class="decoration-dots dots-turquesa" style="bottom:80px; right:10%; width:70px; height:70px;"></div>
+    <div class="decoration-bar bar-horizontal" style="top:80px; right:15%;"></div>
+
+    <div class="container" style="position:relative; z-index:1;">
+        <h1 class="section-title">Panel de Descargas</h1>
+        <p class="section-subtitle">Selecciona un archivo para iniciar la descarga protegida.</p>
 
         <?php if (empty($files)): ?>
-            <div style="background:var(--color-warning-bg); color:var(--color-warning-text); border:1px solid var(--color-warning-border); padding:12px; margin:16px 0;">
+            <div class="alert alert-warning">
                 No hay archivos disponibles en la carpeta de distribucion.
             </div>
         <?php else: ?>
-            <div style="overflow-x:auto; margin:20px 0;">
-                <table style="width:100%; border-collapse:collapse; background:var(--color-white);">
+            <div class="descargas-table-wrapper">
+                <table class="descargas-table">
                     <thead>
-                        <tr style="background:var(--color-table-header);">
-                            <th style="text-align:left; padding:10px; border:1px solid var(--color-table-border);">Archivo</th>
-                            <th style="text-align:left; padding:10px; border:1px solid var(--color-table-border);">Tamano (MB)</th>
-                            <th style="text-align:left; padding:10px; border:1px solid var(--color-table-border);">Actualizado</th>
-                            <th style="text-align:left; padding:10px; border:1px solid var(--color-table-border);">Accion</th>
+                        <tr>
+                            <th>Archivo</th>
+                            <th>Tamano (MB)</th>
+                            <th>Actualizado</th>
+                            <th>Accion</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($files as $file): ?>
                             <tr>
-                                <td style="padding:10px; border:1px solid var(--color-table-border);"><?= esc($file['name']) ?></td>
-                                <td style="padding:10px; border:1px solid var(--color-table-border);"><?= esc($file['size_formatted']) ?></td>
-                                <td style="padding:10px; border:1px solid var(--color-table-border);"><?= esc($file['modified_formatted']) ?></td>
-                                <td style="padding:10px; border:1px solid var(--color-table-border);">
-                                    <a class="btn btn-primary" href="<?= esc($file['download_url']) ?>">Descargar</a>
-                                </td>
+                                <td><?= esc($file['name']) ?></td>
+                                <td><?= esc($file['size_formatted']) ?></td>
+                                <td><?= esc($file['modified_formatted']) ?></td>
+                                <td><a class="btn btn-primary" href="<?= esc($file['download_url']) ?>">Descargar</a></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
