@@ -6,6 +6,7 @@
 <html lang="es">
 <head>
     <?= $this->include('partials/head') ?>
+    <link rel="stylesheet" href="<?= base_url('css/main.css') ?>">
 </head>
 <body>
 
