@@ -4,17 +4,17 @@
 <?= $this->extend('layouts/main') ?>
 
 <?= $this->section('content') ?>
-<section id="pagos-hero" class="bg-section-alt" style="padding: 70px 0 40px;">
-    <div class="container" style="text-align:center; max-width: 900px;">
+<section id="pagos-hero" class="bg-section-alt internal-hero-section">
+    <div class="container container-narrow text-center">
         <h1 class="section-title">Pagos Municipales</h1>
-        <p class="section-subtitle" style="margin: 0 auto;">
+        <p class="section-subtitle centered-block">
             Canal unificado para consulta y pago de obligaciones municipales,
             diseñado para simplificar la experiencia del contribuyente y mejorar la recaudación.
         </p>
     </div>
 </section>
 
-<section id="pagos-beneficios" style="padding-top: 30px;">
+<section id="pagos-beneficios" class="internal-section-tight-top">
     <div class="container">
         <div class="portal-benefits">
             <article class="benefit-card benefit-contribuyente">
@@ -66,7 +66,7 @@
             </div>
         </div>
 
-        <div style="text-align:center; margin-top: 30px;">
+        <div class="text-center margin-top-30">
             <a class="demo-link-btn" href="https://demo.alcaldia.com.ar" target="_blank" rel="noopener noreferrer">
                 Ver Portal Demo de Pagos
             </a>
@@ -74,7 +74,7 @@
     </div>
 </section>
 
-<section id="pagos-soporte" style="padding-top: 70px;">
+<section id="pagos-soporte" class="internal-section-standard-top">
     <div class="container">
         <h2 class="section-title">Soporte de Implementación</h2>
         <div class="features-grid">

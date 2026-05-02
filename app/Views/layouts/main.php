@@ -6,8 +6,9 @@
 <html lang="es">
 <head>
     <?= $this->include('partials/head') ?>
+    <?= $this->renderSection('styles') ?>
 </head>
-<body style="display:flex; flex-direction:column; min-height:100vh;">
+<body class="layout-internal-shell">
 
 <header id="navbar">
     <nav class="nav-container">
@@ -28,7 +29,7 @@
     </nav>
 </header>
 
-<main style="flex:1; padding-top:90px;">
+<main class="layout-internal-main">
     <?= $this->renderSection('content') ?>
 </main>
 
