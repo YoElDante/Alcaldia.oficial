@@ -33,6 +33,7 @@
 </main>
 
 <?= $this->include('partials/footer') ?>
+<?= $this->include('partials/whatsapp') ?>
 
 <script src="<?= base_url('js/main.js') ?>"></script>
 </body>

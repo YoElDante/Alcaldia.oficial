@@ -36,10 +36,7 @@
   </main>
 
   <?= $this->include('partials/footer') ?>
-
-  <a href="https://wa.me/+543515575700?text=Hola,%20quiero%20info%20sobre%20ALCALD+IA" class="whatsapp-float" target="_blank" aria-label="Contactar por WhatsApp">
-    <img src="<?= base_url('assets/whatsapp-icon.svg') ?>" alt="WhatsApp" onerror="this.src='<?= base_url('assets/whatsapp-icon.png') ?>'">
-  </a>
+  <?= $this->include('partials/whatsapp') ?>
 
   <script src="<?= base_url('js/main.js') ?>"></script>
 </body>

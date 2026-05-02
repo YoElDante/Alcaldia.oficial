@@ -5,11 +5,10 @@ RedirectMatch 403 ^/(app|vendor|writable|storage|system)(/?.*)?$
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    # Deja pasar archivos y carpetas que existen fisicamente (assets, css, etc.)
-    RewriteCond %{REQUEST_FILENAME} -f [OR]
-    RewriteCond %{REQUEST_FILENAME} -d
-    RewriteRule ^ - [L]
+    # Evita reescrituras duplicadas cuando la request ya apunta a public/.
+    RewriteRule ^public/ - [L]
 
-    # Todo lo demas va a public/
+    # Fuerza que toda la navegacion publica pase por el front controller de CI4.
+    RewriteRule ^$ public/ [L]
     RewriteRule ^(.*)$ public/$1 [L]
 </IfModule>
