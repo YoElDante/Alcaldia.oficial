@@ -11,6 +11,10 @@
             Biblioteca práctica para adoptar ALCALD+IA con procesos claros,
             desde el alta inicial hasta la operación diaria.
         </p>
+        <!-- Decoraciones de sección -->
+        <div class="decoration-dots dots-turquesa" style="top:8%; right:5%;"></div>
+        <div class="decoration-dots dots-dark" style="bottom:10%; left:3%;"></div>
+        <div class="decoration-circle circle-outline" style="top:5%; left:8%;"></div>
     </div>
 </section>
 
@@ -81,6 +85,9 @@
             <img src="<?= base_url('assets/whatsapp-icon.png') ?>" alt="WhatsApp">
             Solicitar capacitación
         </a>
+        <!-- Decoraciones de sección -->
+        <div class="decoration-bar bar-horizontal" style="top:20%; left:10%;"></div>
+        <div class="decoration-dots dots-turquesa" style="bottom:8%; right:12%;"></div>
     </div>
 </section>
 <?= $this->endSection() ?>
