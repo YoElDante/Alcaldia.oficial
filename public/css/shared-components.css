@@ -513,6 +513,68 @@ img {
 .section-diagonal-bars.bars-light .diagonal-bar { background: rgba(255, 255, 255, 0.4); }
 
 /* ===========================================
+   FOOTER COMPARTIDO — visible en todas las vistas internas
+   =========================================== */
+footer {
+  background-color: var(--color-dark);
+  color: var(--color-white);
+  padding: 60px 0 20px;
+  margin-top: auto;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-logo {
+  width: 150px;
+  margin-bottom: 15px;
+}
+
+.footer-brand p {
+  opacity: 0.8;
+}
+
+.footer-links h4,
+.footer-contact h4,
+.footer-demo h4 {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  color: var(--color-primary);
+}
+
+.footer-links ul,
+.footer-demo ul {
+  list-style: none;
+}
+
+.footer-links li,
+.footer-demo li {
+  margin-bottom: 10px;
+}
+
+.footer-links a:hover,
+.footer-demo a:hover {
+  color: var(--color-primary);
+}
+
+.footer-contact p {
+  margin-bottom: 10px;
+  opacity: 0.9;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 20px;
+  opacity: 0.7;
+  font-size: 0.9rem;
+}
+
+/* ===========================================
    RESPONSIVE COMPARTIDO
    =========================================== */
 @media (max-width: 768px) {

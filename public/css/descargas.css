@@ -53,7 +53,7 @@
   position: absolute;
   width: 90px;
   height: 90px;
-  background-image: 
+  background-image:
     radial-gradient(circle, currentColor 2px, transparent 2px);
   background-size: 12px 12px;
   opacity: 0.15;
@@ -151,4 +151,53 @@
   text-align: left;
   padding: 10px;
   border: 1px solid var(--color-table-border);
+}
+
+.descargas-table tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+.descargas-form button,
+.descargas-form input[type="submit"] {
+  margin-top: 8px;
+}
+
+/* Responsive — tablet y mobile */
+@media (max-width: 1024px) {
+  .descargas-container,
+  .descargas-container-wrapper {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .descargas-form input[type="password"] {
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  .descargas-table {
+    font-size: 0.9rem;
+  }
+
+  .descargas-table th,
+  .descargas-table td {
+    padding: 8px;
+  }
+
+  .btn {
+    padding: 10px 18px;
+    font-size: 0.9rem;
+  }
+
+  .decoration-circle,
+  .decoration-dots,
+  .decoration-bar {
+    display: none;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+}
 }
