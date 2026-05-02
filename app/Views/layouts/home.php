@@ -26,6 +26,16 @@
         <li><a href="#producto">Características</a></li>
         <li><a href="#portal">Portal de Pago</a></li>
         <li><a href="#portal-demo">Portal Demo</a></li>
+        <li class="nav-dropdown" id="internalAreaNavItem">
+          <button class="nav-dropdown-toggle" id="internalAreaToggle" type="button" aria-expanded="false" aria-controls="internalAreaMenu">
+            Portal interno
+          </button>
+          <ul class="nav-dropdown-menu" id="internalAreaMenu">
+            <li><a href="<?= site_url('/pagos') ?>">Pagos</a></li>
+            <li><a href="<?= site_url('/tutoriales') ?>">Tutoriales</a></li>
+            <li><a href="<?= site_url('/descargas') ?>">Descargas</a></li>
+          </ul>
+        </li>
         <li><a href="#sobre-nosotros">Nosotros</a></li>
         <li><a href="#contacto">Contacto</a></li>
       </ul>

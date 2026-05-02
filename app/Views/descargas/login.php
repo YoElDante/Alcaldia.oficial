@@ -23,7 +23,7 @@
     <div class="decoration-bar bar-horizontal-dark" style="top:6%; right:12%;"></div>
     <div class="decoration-bar bar-horizontal-dark" style="bottom:6%; left:0;"></div>
 
-    <div class="container descargas-container">
+    <div class="container descargas-container section-content-layer">
         <h1 class="section-title">Descargas</h1>
         <p class="section-subtitle">Ingresa tu clave temporal para acceder al panel de descargas.</p>
 

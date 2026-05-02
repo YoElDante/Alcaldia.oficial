@@ -126,6 +126,10 @@ img {
   align-items: center;
 }
 
+.nav-links li {
+  position: relative;
+}
+
 .nav-links a {
   font-family: 'Open Sans', sans-serif;
   font-weight: 600;
@@ -164,6 +168,102 @@ img {
 
 .nav-links a.active::after {
   display: none;
+}
+
+.nav-dropdown-toggle {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--color-dark);
+  padding: 10px 16px;
+  border: none;
+  border-radius: 25px;
+  background: transparent;
+  transition: var(--transicion);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.nav-dropdown-toggle::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translateY(-1px);
+  transition: transform 0.2s ease;
+}
+
+.nav-dropdown-toggle:hover,
+.nav-dropdown-toggle:focus-visible,
+.nav-dropdown.is-open .nav-dropdown-toggle,
+.nav-dropdown:hover .nav-dropdown-toggle,
+.nav-dropdown:focus-within .nav-dropdown-toggle {
+  color: var(--color-primary);
+}
+
+.nav-dropdown-toggle:focus-visible {
+  outline: 2px solid rgba(0, 168, 181, 0.35);
+  outline-offset: 2px;
+}
+
+.nav-dropdown::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 14px;
+}
+
+.nav-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 200px;
+  margin: 0;
+  padding: 10px;
+  list-style: none;
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 16px;
+  box-shadow: 0 16px 40px rgba(0, 62, 92, 0.14);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+}
+
+.nav-dropdown-menu li {
+  border-bottom: none;
+}
+
+.nav-dropdown-menu a {
+  display: block;
+  padding: 12px 14px;
+  border-radius: 12px;
+}
+
+.nav-dropdown-menu a:hover {
+  background: var(--color-light-bg);
+}
+
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown:focus-within .nav-dropdown-menu,
+.nav-dropdown.is-open .nav-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.nav-dropdown:hover .nav-dropdown-toggle::after,
+.nav-dropdown:focus-within .nav-dropdown-toggle::after,
+.nav-dropdown.is-open .nav-dropdown-toggle::after {
+  transform: rotate(-135deg) translate(-1px, -1px);
 }
 
 .hamburger {
@@ -349,6 +449,11 @@ img {
   overflow: hidden;
 }
 
+.section-content-layer {
+  position: relative;
+  z-index: 1;
+}
+
 /* ===========================================
    SISTEMA DE DECORACIONES
    Clases base reutilizables en TODAS las vistas.
@@ -375,9 +480,25 @@ img {
   background-size: 15px 15px;
 }
 
-.dots-top-left    { top: 8%; left: 4%; }
-.dots-bottom-right { bottom: 10%; right: 4%; width: 150px; height: 150px; }
-.dots-middle-left  { top: 60%; left: 8%; width: 80px; height: 80px; background-size: 12px 12px; }
+.dots-top-left {
+  top: 8%;
+  left: 4%;
+}
+
+.dots-bottom-right {
+  bottom: 10%;
+  right: 4%;
+  width: 150px;
+  height: 150px;
+}
+
+.dots-middle-left {
+  top: 60%;
+  left: 8%;
+  width: 80px;
+  height: 80px;
+  background-size: 12px 12px;
+}
 
 /* --- Círculos base --- */
 .hero-circle {
@@ -385,38 +506,66 @@ img {
   border: 2px solid rgba(255, 255, 255, 0.18);
 }
 
-.hero-circle-1 { width: 120px; height: 120px; top: 16%; right: 18%; }
-.hero-circle-2 { width: 80px;  height: 80px;  bottom: 18%; left: 18%; }
-.hero-circle-3 { width: 160px; height: 160px; top: 55%; right: 6%; border-color: rgba(255, 255, 255, 0.12); }
+.hero-circle-1 {
+  width: 120px;
+  height: 120px;
+  top: 16%;
+  right: 18%;
+}
+
+.hero-circle-2 {
+  width: 80px;
+  height: 80px;
+  bottom: 18%;
+  left: 18%;
+}
+
+.hero-circle-3 {
+  width: 160px;
+  height: 160px;
+  top: 55%;
+  right: 6%;
+  border-color: rgba(255, 255, 255, 0.12);
+}
 
 /* --- Círculos semánticos --- */
-.decoration-circle { border-radius: 50%; }
+.decoration-circle {
+  border-radius: 50%;
+}
 
 .decoration-circle.circle-outline {
-  width: 120px; height: 120px;
+  width: 120px;
+  height: 120px;
   border: 3px solid var(--color-primary);
   opacity: 0.15;
 }
 
 .decoration-circle.circle-filled {
-  width: 80px; height: 80px;
+  width: 80px;
+  height: 80px;
   background: var(--color-primary);
   opacity: 0.08;
 }
 
 .decoration-circle.circle-outline-dark {
-  width: 100px; height: 100px;
+  width: 100px;
+  height: 100px;
   border: 3px solid var(--color-dark);
   opacity: 0.1;
 }
 
 .decoration-circle.circle-light {
-  width: 100px; height: 100px;
+  width: 100px;
+  height: 100px;
   border: 3px solid rgba(255, 255, 255, 0.3);
 }
 
 /* --- Puntos semánticos --- */
-.decoration-dots { width: 100px; height: 100px; background-size: 12px 12px; }
+.decoration-dots {
+  width: 100px;
+  height: 100px;
+  background-size: 12px 12px;
+}
 
 .decoration-dots.dots-turquesa {
   background-image: radial-gradient(circle, var(--color-primary) 2px, transparent 2px);
@@ -435,7 +584,8 @@ img {
 
 /* Puntos institucionales para fondos claros */
 .section-dots {
-  width: 100px; height: 100px;
+  width: 100px;
+  height: 100px;
   background-image: radial-gradient(circle, var(--color-primary) 2px, transparent 2px);
   background-size: 14px 14px;
   opacity: 0.15;
@@ -448,34 +598,39 @@ img {
 
 /* --- Barras semánticas --- */
 .section-bar {
-  width: 80px; height: 5px;
+  width: 80px;
+  height: 5px;
   background: linear-gradient(90deg, var(--color-primary), transparent);
   border-radius: 3px;
 }
 
 .decoration-bar.bar-horizontal {
-  width: 100px; height: 6px;
+  width: 100px;
+  height: 6px;
   background: linear-gradient(90deg, var(--color-primary), transparent);
   border-radius: 3px;
   opacity: 0.3;
 }
 
 .decoration-bar.bar-horizontal-dark {
-  width: 100px; height: 6px;
+  width: 100px;
+  height: 6px;
   background: linear-gradient(90deg, var(--color-dark), transparent);
   border-radius: 3px;
   opacity: 0.15;
 }
 
 .decoration-bar.bar-vertical {
-  width: 6px; height: 80px;
+  width: 6px;
+  height: 80px;
   background: linear-gradient(180deg, var(--color-primary), transparent);
   border-radius: 3px;
   opacity: 0.25;
 }
 
 .decoration-bar.bar-light {
-  width: 100px; height: 6px;
+  width: 100px;
+  height: 6px;
   background: linear-gradient(90deg, rgba(255, 255, 255, 0.5), transparent);
   border-radius: 3px;
 }
@@ -490,12 +645,14 @@ img {
 }
 
 .section-diagonal-bars.bars-left {
-  left: -20px; top: 50%;
+  left: -20px;
+  top: 50%;
   transform: translateY(-50%) rotate(-45deg);
 }
 
 .section-diagonal-bars.bars-right {
-  right: -20px; top: 50%;
+  right: -20px;
+  top: 50%;
   transform: translateY(-50%) rotate(45deg);
 }
 
@@ -505,12 +662,25 @@ img {
   background: var(--color-primary);
 }
 
-.section-diagonal-bars .diagonal-bar:nth-child(1) { width: 60px; }
-.section-diagonal-bars .diagonal-bar:nth-child(2) { width: 50px; }
-.section-diagonal-bars .diagonal-bar:nth-child(3) { width: 40px; }
+.section-diagonal-bars .diagonal-bar:nth-child(1) {
+  width: 60px;
+}
 
-.section-diagonal-bars.bars-dark .diagonal-bar  { background: var(--color-dark); }
-.section-diagonal-bars.bars-light .diagonal-bar { background: rgba(255, 255, 255, 0.4); }
+.section-diagonal-bars .diagonal-bar:nth-child(2) {
+  width: 50px;
+}
+
+.section-diagonal-bars .diagonal-bar:nth-child(3) {
+  width: 40px;
+}
+
+.section-diagonal-bars.bars-dark .diagonal-bar {
+  background: var(--color-dark);
+}
+
+.section-diagonal-bars.bars-light .diagonal-bar {
+  background: rgba(255, 255, 255, 0.4);
+}
 
 /* ===========================================
    FOOTER COMPARTIDO — visible en todas las vistas internas
@@ -575,6 +745,33 @@ footer {
 }
 
 /* ===========================================
+   WHATSAPP FLOTANTE — visible en todas las vistas
+   =========================================== */
+.whatsapp-float {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--color-whatsapp);
+  box-shadow: 0 10px 30px rgba(37, 211, 102, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1100;
+}
+
+.whatsapp-float:hover {
+  transform: translateY(-3px) scale(1.03);
+}
+
+.whatsapp-float img {
+  width: 28px;
+  height: 28px;
+}
+
+/* ===========================================
    RESPONSIVE COMPARTIDO
    =========================================== */
 @media (max-width: 768px) {
@@ -627,8 +824,73 @@ footer {
     touch-action: manipulation;
   }
 
+  .nav-dropdown-toggle {
+    color: var(--color-dark);
+    padding: 18px 25px;
+    width: 100%;
+    text-align: left;
+    font-size: 1rem;
+    border-radius: 0;
+    min-height: 56px;
+    justify-content: space-between;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  .nav-dropdown::after {
+    display: none;
+  }
+
+  .nav-dropdown-menu {
+    position: static;
+    min-width: 100%;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: rgba(224, 247, 250, 0.55);
+    max-height: 0;
+    overflow: hidden;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    pointer-events: auto;
+    transition: max-height 0.25s ease;
+  }
+
+  .nav-dropdown-menu li:last-child {
+    border-bottom: none;
+  }
+
+  .nav-dropdown-menu a {
+    padding: 16px 40px;
+    border-radius: 0;
+    min-height: auto;
+    font-size: 0.95rem;
+  }
+
+  .nav-dropdown.is-open .nav-dropdown-menu {
+    max-height: 220px;
+  }
+
+  .nav-dropdown:hover .nav-dropdown-menu,
+  .nav-dropdown:focus-within .nav-dropdown-menu {
+    max-height: 220px;
+  }
+
+  .nav-dropdown:hover .nav-dropdown-toggle,
+  .nav-dropdown:focus-within .nav-dropdown-toggle,
+  .nav-dropdown.is-open .nav-dropdown-toggle {
+    background-color: var(--color-light-bg);
+    color: var(--color-primary);
+  }
+
   .nav-links a::after {
     display: none;
+  }
+
+  .nav-dropdown-toggle::after {
+    width: 10px;
+    height: 10px;
   }
 
   .nav-links a:hover,
@@ -675,9 +937,17 @@ footer {
     opacity: 0.1;
   }
 
-  .section-diagonal-bars .diagonal-bar:nth-child(1) { width: 40px; }
-  .section-diagonal-bars .diagonal-bar:nth-child(2) { width: 30px; }
-  .section-diagonal-bars .diagonal-bar:nth-child(3) { display: none; }
+  .section-diagonal-bars .diagonal-bar:nth-child(1) {
+    width: 40px;
+  }
+
+  .section-diagonal-bars .diagonal-bar:nth-child(2) {
+    width: 30px;
+  }
+
+  .section-diagonal-bars .diagonal-bar:nth-child(3) {
+    display: none;
+  }
 
   .btn {
     padding: 12px 30px;
@@ -686,5 +956,21 @@ footer {
 
   .section-title {
     font-size: 1.8rem;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  footer {
+    padding: 40px 0 20px;
+  }
+
+  .whatsapp-float {
+    width: 52px;
+    height: 52px;
+    bottom: 18px;
+    right: 18px;
   }
 }

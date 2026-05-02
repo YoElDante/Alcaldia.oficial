@@ -6,7 +6,5 @@
    target="_blank"
    rel="noopener noreferrer"
    aria-label="Contactar por WhatsApp">
-    <img src="<?= base_url('assets/whatsapp-icon.svg') ?>"
-         alt="WhatsApp"
-         onerror="this.src='<?= base_url('assets/whatsapp-icon.png') ?>'">
+   <img src="<?= base_url('assets/whatsapp-icon.svg') ?>" alt="WhatsApp">
 </a>

@@ -20,3 +20,6 @@ $routes->post('/descargas/login', 'DescargasController::login', ['filter' => 'ra
 $routes->get('/descargas/panel', 'DescargasController::panel', ['filter' => 'auth']);
 $routes->get('/descargas/archivo/(:segment)', 'DescargasController::download/$1', ['filter' => 'auth']);
 $routes->get('/descargas/logout', 'DescargasController::logout', ['filter' => 'auth']);
+
+// Captura cualquier GET no definido para asegurar la vista 404 institucional.
+$routes->get('(:any)', 'ErrorsController::notFound');

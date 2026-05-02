@@ -5,6 +5,34 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  const internalAreaNavItem = document.getElementById('internalAreaNavItem');
+  const internalAreaToggle = document.getElementById('internalAreaToggle');
+
+  // Cierra el submenú de Área interna y sincroniza el estado accesible del botón.
+  function closeInternalAreaMenu() {
+    if (!internalAreaNavItem || !internalAreaToggle) {
+      return;
+    }
+
+    internalAreaNavItem.classList.remove('is-open');
+    internalAreaToggle.setAttribute('aria-expanded', 'false');
+  }
+
+  // Cierra el menú mobile completo y resetea el submenú interno si estuviera abierto.
+  function closeMobileMenu() {
+    if (navLinks) {
+      navLinks.classList.remove('active');
+    }
+
+    if (hamburger) {
+      hamburger.classList.remove('active');
+    }
+
+    closeInternalAreaMenu();
+  }
+
   // ===========================================
   // SMOOTH SCROLL
   // ===========================================
@@ -22,8 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         // Cerrar menú móvil si está abierto
-        document.getElementById('navLinks').classList.remove('active');
-        document.getElementById('hamburger').classList.remove('active');
+        closeMobileMenu();
       }
     });
   });
@@ -31,19 +58,38 @@ document.addEventListener('DOMContentLoaded', function () {
   // ===========================================
   // NAVBAR MOBILE - Hamburger Menu
   // ===========================================
-  const hamburger = document.getElementById('hamburger');
-  const navLinks = document.getElementById('navLinks');
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', function () {
+      this.classList.toggle('active');
+      navLinks.classList.toggle('active');
 
-  hamburger.addEventListener('click', function () {
-    this.classList.toggle('active');
-    navLinks.classList.toggle('active');
-  });
+      if (!navLinks.classList.contains('active')) {
+        closeInternalAreaMenu();
+      }
+    });
+  }
+
+  if (internalAreaToggle && internalAreaNavItem) {
+    internalAreaToggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      const isOpen = internalAreaNavItem.classList.toggle('is-open');
+      internalAreaToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  }
 
   // Cerrar menú al hacer click fuera
   document.addEventListener('click', function (e) {
-    if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
-      hamburger.classList.remove('active');
-      navLinks.classList.remove('active');
+    const clickedOutsideHamburger = !hamburger || !hamburger.contains(e.target);
+    const clickedOutsideNav = !navLinks || !navLinks.contains(e.target);
+
+    if (clickedOutsideHamburger && clickedOutsideNav) {
+      closeMobileMenu();
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      closeMobileMenu();
     }
   });
 

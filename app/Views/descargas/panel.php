@@ -22,7 +22,7 @@
     <div class="decoration-dots dots-turquesa" style="bottom:8%; right:10%;"></div>
     <div class="decoration-bar bar-horizontal" style="top:8%; right:15%;"></div>
 
-    <div class="container descargas-container-wrapper">
+    <div class="container descargas-container-wrapper section-content-layer">
         <h1 class="section-title">Panel de Descargas</h1>
         <p class="section-subtitle">Selecciona un archivo para iniciar la descarga protegida.</p>
 

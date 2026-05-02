@@ -22,6 +22,8 @@ class ErrorsController extends BaseController
         $path = trim($this->request->getUri()->getPath(), '/');
         $path = UriService::normalizePublicPath($path);
 
+        $this->response->setStatusCode(404);
+
         return view('errors/html/error_404', [
             'urlNoEncontrada' => base_url($path),
         ]);

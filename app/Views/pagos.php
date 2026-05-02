@@ -1,11 +1,18 @@
 <?php /* Vista institucional de la ruta /pagos.
-   Presenta canales de cobro y beneficios para contribuyentes y municipio.
-   Dependencias: layouts/main, clases de main.css, enlaces externos de demo. */ ?>
+    Presenta canales de cobro y beneficios para contribuyentes y municipio.
+    Dependencias: layouts/main, main.css y enlaces externos de demo. */ ?>
 <?= $this->extend('layouts/main') ?>
 
+<?= $this->section('styles') ?>
+<link rel="stylesheet" href="<?= base_url('css/main.css') ?>">
+<?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
-<section id="pagos-hero" class="bg-section-alt internal-hero-section">
-    <div class="container container-narrow text-center">
+<section id="pagos-hero" class="bg-section-alt internal-hero-section bg-decoration-canvas">
+    <div class="decoration-dots dots-turquesa" style="top:8%; right:5%;"></div>
+    <div class="decoration-dots dots-dark" style="bottom:10%; left:3%;"></div>
+    <div class="decoration-circle circle-outline" style="top:6%; left:8%;"></div>
+    <div class="container container-narrow text-center section-content-layer">
         <h1 class="section-title">Pagos Municipales</h1>
         <p class="section-subtitle centered-block">
             Canal unificado para consulta y pago de obligaciones municipales,
@@ -14,7 +21,9 @@
     </div>
 </section>
 
-<section id="pagos-beneficios" class="internal-section-tight-top">
+<section id="pagos-beneficios" class="internal-section-tight-top bg-decoration-canvas">
+    <div class="decoration-bar bar-horizontal" style="top:12%; left:0;"></div>
+    <div class="decoration-circle circle-filled" style="bottom:8%; right:4%;"></div>
     <div class="container">
         <div class="portal-benefits">
             <article class="benefit-card benefit-contribuyente">
@@ -42,13 +51,15 @@
     </div>
 </section>
 
-<section id="pagos-canales" class="bg-section-alt">
-    <div class="container">
+<section id="pagos-canales" class="bg-section-alt bg-decoration-canvas">
+    <div class="decoration-dots dots-turquesa" style="top:14%; left:4%;"></div>
+    <div class="decoration-bar bar-horizontal-dark" style="bottom:14%; right:0;"></div>
+    <div class="container section-content-layer">
         <h2 class="section-title">Canales de Pago</h2>
         <div class="portal-payment-info">
             <div class="payment-current">
-                <img src="<?= base_url('assets/images/SIRO_LOGO.webp') ?>" alt="SIRO" class="payment-logo">
-                <div>
+                <img src="<?= base_url('assets/images/siro-logo.webp') ?>" alt="SIRO" class="payment-logo">
+                <div class="payment-current-copy">
                     <div class="payment-badge">
                         <span class="payment-icon">✅</span>
                         <span>Integración activa</span>
@@ -66,16 +77,27 @@
             </div>
         </div>
 
-        <div class="text-center margin-top-30">
+        <div class="text-center margin-top-30 payment-demo-cta">
+            <p class="payment-demo-note">
+                Al hacer clic en el botón, será redirigido al portal de pago de demostración,
+                donde podrá visualizar cómo sus contribuyentes consultarían su deuda vigente y completarían el pago online desde un único punto de acceso.
+            </p>
             <a class="demo-link-btn" href="https://demo.alcaldia.com.ar" target="_blank" rel="noopener noreferrer">
-                Ver Portal Demo de Pagos
+                <span class="demo-link-icon" aria-hidden="true">↗</span>
+                <span>Ir a pagar</span>
             </a>
         </div>
     </div>
 </section>
 
-<section id="pagos-soporte" class="internal-section-standard-top">
-    <div class="container">
+<section id="pagos-soporte" class="internal-section-standard-top bg-decoration-canvas">
+    <div class="section-diagonal-bars bars-right bars-dark">
+        <div class="diagonal-bar"></div>
+        <div class="diagonal-bar"></div>
+        <div class="diagonal-bar"></div>
+    </div>
+    <div class="decoration-dots dots-dark" style="top:10%; right:6%;"></div>
+    <div class="container section-content-layer">
         <h2 class="section-title">Soporte de Implementación</h2>
         <div class="features-grid">
             <article class="feature-card">

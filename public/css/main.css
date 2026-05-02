@@ -569,6 +569,13 @@ section {
   max-width: 550px;
 }
 
+.payment-current-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+
 .payment-logo {
   height: 45px;
   width: auto;
@@ -584,6 +591,7 @@ section {
   border-radius: 25px;
   font-weight: 600;
   white-space: nowrap;
+  justify-content: center;
 }
 
 .payment-icon {
@@ -633,7 +641,10 @@ section {
 }
 
 .demo-link-btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   margin-top: 12px;
   padding: 10px 22px;
   background: var(--color-dark);
@@ -644,6 +655,32 @@ section {
   text-decoration: none;
   transition: background 0.2s, transform 0.15s;
   letter-spacing: 0.03em;
+}
+
+.demo-link-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.payment-demo-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.payment-demo-note {
+  max-width: 62ch;
+  margin: 0 auto;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
 }
 
 .demo-link-btn:hover {
@@ -926,31 +963,7 @@ footer {
 /* ===========================================
    WHATSAPP FLOTANTE
    =========================================== */
-.whatsapp-float {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 60px;
-  height: 60px;
-  background-color: var(--color-whatsapp);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-  z-index: 999;
-  transition: var(--transicion);
-}
-
-.whatsapp-float:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 25px rgba(37, 211, 102, 0.5);
-}
-
-.whatsapp-float img {
-  width: 35px;
-  height: 35px;
-}
+/* Botón flotante compartido movido a shared-components.css. */
 
 /* ===========================================
    ANIMACIONES
@@ -1219,6 +1232,10 @@ footer {
     max-width: 100%;
   }
 
+  .payment-current-copy {
+    align-items: center;
+  }
+
   .payment-current p {
     font-size: 0.9rem;
   }
@@ -1226,6 +1243,10 @@ footer {
   .payment-future {
     flex: 1;
     padding: 20px;
+  }
+
+  .payment-demo-note {
+    font-size: 0.95rem;
   }
 
   /* Clientes */
