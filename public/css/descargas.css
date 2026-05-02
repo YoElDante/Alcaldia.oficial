@@ -13,6 +13,89 @@
   z-index: 1;
 }
 
+.descargas-container-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+/* Decoraciones reutilizables — medidas segun contexto */
+.decoration-circle {
+  position: absolute;
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.decoration-circle.circle-outline-dark {
+  width: 180px;
+  height: 180px;
+  border: 2px solid var(--color-dark);
+  opacity: 0.15;
+}
+
+.decoration-circle.circle-outline-dark:nth-of-type(2) {
+  width: 140px;
+  height: 140px;
+}
+
+.decoration-circle.circle-outline {
+  width: 160px;
+  height: 160px;
+  border: 2px solid var(--color-primary);
+  opacity: 0.12;
+}
+
+.decoration-circle.circle-outline:nth-of-type(2) {
+  width: 100px;
+  height: 100px;
+}
+
+.decoration-dots {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  background-image: 
+    radial-gradient(circle, currentColor 2px, transparent 2px);
+  background-size: 12px 12px;
+  opacity: 0.15;
+  z-index: 0;
+}
+
+.decoration-dots.dots-dark {
+  color: var(--color-dark);
+}
+
+.decoration-dots.dots-turquesa {
+  color: var(--color-primary);
+}
+
+.decoration-dots.dots-turquesa:nth-of-type(3) {
+  width: 90px;
+  height: 90px;
+}
+
+.decoration-dots.dots-turquesa:nth-of-type(4) {
+  width: 70px;
+  height: 70px;
+}
+
+.decoration-bar {
+  position: absolute;
+  height: 4px;
+  z-index: 0;
+}
+
+.decoration-bar.bar-horizontal-dark {
+  width: 200px;
+  background: linear-gradient(90deg, var(--color-dark), transparent);
+  opacity: 0.1;
+}
+
+.decoration-bar.bar-horizontal {
+  width: 180px;
+  background: linear-gradient(90deg, var(--color-primary), transparent);
+  opacity: 0.12;
+}
+
 .descargas-form label {
   display: block;
   margin-bottom: 6px;

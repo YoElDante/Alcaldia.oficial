@@ -16,12 +16,12 @@
 <section class="bg-section-alt descargas-section">
 
     <!-- Decoraciones: mismos colores que sección Características de la landing -->
-    <div class="decoration-circle circle-outline-dark" style="top:-30px; right:8%; width:180px; height:180px;"></div>
-    <div class="decoration-circle circle-outline-dark" style="bottom:-40px; left:5%; width:140px; height:140px;"></div>
-    <div class="decoration-dots dots-dark" style="top:30px; left:6%;"></div>
-    <div class="decoration-dots dots-dark" style="bottom:40px; right:5%;"></div>
-    <div class="decoration-bar bar-horizontal-dark" style="top:60px; right:12%;"></div>
-    <div class="decoration-bar bar-horizontal-dark" style="bottom:60px; left:0; transform:rotate(180deg);"></div>
+    <div class="decoration-circle circle-outline-dark" style="top:-5%; right:8%;"></div>
+    <div class="decoration-circle circle-outline-dark" style="bottom:-5%; left:5%;"></div>
+    <div class="decoration-dots dots-dark" style="top:3%; left:6%;"></div>
+    <div class="decoration-dots dots-dark" style="bottom:5%; right:5%;"></div>
+    <div class="decoration-bar bar-horizontal-dark" style="top:6%; right:12%;"></div>
+    <div class="decoration-bar bar-horizontal-dark" style="bottom:6%; left:0;"></div>
 
     <div class="container descargas-container">
         <h1 class="section-title">Descargas</h1>

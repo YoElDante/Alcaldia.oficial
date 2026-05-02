@@ -16,13 +16,13 @@
 <section class="descargas-section">
 
     <!-- Decoraciones: círculos outline turquesa y puntos a la derecha -->
-    <div class="decoration-circle circle-outline" style="top:-30px; right:6%; width:160px; height:160px;"></div>
-    <div class="decoration-circle circle-outline" style="bottom:40px; right:3%; width:100px; height:100px;"></div>
-    <div class="decoration-dots dots-turquesa" style="top:60px; right:4%; width:90px; height:90px;"></div>
-    <div class="decoration-dots dots-turquesa" style="bottom:80px; right:10%; width:70px; height:70px;"></div>
-    <div class="decoration-bar bar-horizontal" style="top:80px; right:15%;"></div>
+    <div class="decoration-circle circle-outline" style="top:-5%; right:6%;"></div>
+    <div class="decoration-circle circle-outline" style="bottom:5%; right:3%;"></div>
+    <div class="decoration-dots dots-turquesa" style="top:6%; right:4%;"></div>
+    <div class="decoration-dots dots-turquesa" style="bottom:8%; right:10%;"></div>
+    <div class="decoration-bar bar-horizontal" style="top:8%; right:15%;"></div>
 
-    <div class="container" style="position:relative; z-index:1;">
+    <div class="container descargas-container-wrapper">
         <h1 class="section-title">Panel de Descargas</h1>
         <p class="section-subtitle">Selecciona un archivo para iniciar la descarga protegida.</p>
 
