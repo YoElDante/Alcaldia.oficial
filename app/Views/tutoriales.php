@@ -4,17 +4,17 @@
 <?= $this->extend('layouts/main') ?>
 
 <?= $this->section('content') ?>
-<section id="tutoriales-hero" class="bg-section-alt" style="padding: 70px 0 40px;">
-    <div class="container" style="text-align:center; max-width: 900px;">
+<section id="tutoriales-hero" class="bg-section-alt internal-hero-section">
+    <div class="container container-narrow text-center">
         <h1 class="section-title">Tutoriales</h1>
-        <p class="section-subtitle" style="margin: 0 auto;">
+        <p class="section-subtitle centered-block">
             Biblioteca práctica para adoptar ALCALD+IA con procesos claros,
             desde el alta inicial hasta la operación diaria.
         </p>
     </div>
 </section>
 
-<section id="tutoriales-rutas" style="padding-top: 30px;">
+<section id="tutoriales-rutas" class="internal-section-tight-top">
     <div class="container">
         <div class="features-grid">
             <article class="feature-card">
@@ -67,10 +67,10 @@
     </div>
 </section>
 
-<section id="tutoriales-acceso" style="padding-top: 70px;">
-    <div class="container" style="text-align:center; max-width: 820px;">
+<section id="tutoriales-acceso" class="internal-section-standard-top">
+    <div class="container container-medium text-center">
         <h2 class="section-title">Acceso a Recursos</h2>
-        <p class="portal-description" style="margin-bottom: 26px;">
+        <p class="portal-description margin-bottom-26">
             Estamos consolidando el repositorio de guías paso a paso, videos y material de soporte.
             Mientras tanto, podés solicitar asistencia personalizada para tu equipo.
         </p>
@@ -78,7 +78,7 @@
            class="btn btn-whatsapp"
            target="_blank"
            rel="noopener noreferrer">
-            <img src="<?= base_url('assets/whatsapp-icon.svg') ?>" alt="WhatsApp" onerror="this.src='<?= base_url('assets/whatsapp-icon.png') ?>'">
+            <img src="<?= base_url('assets/whatsapp-icon.png') ?>" alt="WhatsApp">
             Solicitar capacitación
         </a>
     </div>

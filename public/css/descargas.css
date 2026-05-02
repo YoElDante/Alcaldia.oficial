@@ -1,0 +1,71 @@
+/* Estilos exclusivos de las vistas de descargas (login y panel).
+   Variables, navbar, botones y decoraciones → shared-components.css (cargado antes). */
+
+.descargas-section {
+  padding: 48px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.descargas-container {
+  max-width: 520px;
+  position: relative;
+  z-index: 1;
+}
+
+.descargas-form label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.descargas-form input[type="password"] {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.alert {
+  padding: 12px;
+  margin: 16px 0;
+  border-radius: 6px;
+}
+
+.alert-error {
+  background: var(--color-error-bg);
+  color: var(--color-error-text);
+  border: 1px solid var(--color-error-border);
+}
+
+.alert-warning {
+  background: var(--color-warning-bg);
+  color: var(--color-warning-text);
+  border: 1px solid var(--color-warning-border);
+}
+
+/* Panel de descargas — tabla */
+.descargas-table-wrapper {
+  overflow-x: auto;
+  margin: 20px 0;
+}
+
+.descargas-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--color-white);
+}
+
+.descargas-table thead tr {
+  background: var(--color-table-header);
+}
+
+.descargas-table th,
+.descargas-table td {
+  text-align: left;
+  padding: 10px;
+  border: 1px solid var(--color-table-border);
+}
